@@ -1,16 +1,15 @@
 %动画模拟电磁波在导电媒质中的传播衰减特性
 %作者：段庆威， 西安电子科技大学 物理学院
 %日期：2025年3月
-clear       %清零变量
-close all   %清零图窗
-k2 = 1;     %衰减常数, 0.5, 2
-a = 1;          %振幅
-omega = 1*pi;   %角频率
-lamda = 1;
+clear; close all   %清零图窗
+k2 = 1;          %衰减常数
+lamda = 1;       %波长
 k = 2*pi/lamda;  %相位常数
-phi_0 = 0;      %初相位
-x = linspace(0, 10, 500);   %展示范围0~4*pi
-
+a = 1;           %振幅
+phi_0 = 0;       %初相位
+omega = 1*pi;   %角频率
+x = linspace(0, 10, 500);  %传播距离设置
+gifname='导电媒质中的传播动画.gif';%动图文件名
 figure('Position',[0,0,500,600],'Color','w')  
 grid on;        %生成网络线
 hold on;        %保持图像
@@ -30,7 +29,7 @@ ylabel('电场','fontsize',30,'FontName','宋体');
 t = 0;  %初始化
 dt = 0.1;         %时间步长, 0.1秒
 set(gca,'position',[0.11, 0.15, 0.85, 0.84],'Color',[0.16,0.98,0.98])
-gifname = ['Animation_wave_in_lossy_medium ',num2str(k2,'%.1f'),'.gif'];  %GIF动图文件名
+
 while t <= 10      %绘制10个周期内的时变特性，周期T=1s
     for i=1:length(x)     
         dataY(i)=a*exp(-k2*x(i)).*cos(omega*t - k*x(i) + phi_0);  %特定t时刻下，y随x的变化
